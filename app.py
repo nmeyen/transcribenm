@@ -10,34 +10,20 @@ AWS_REGION = 'ap-south-1'
 INPUT_BUCKET = 'awstranscribeinput'    # Pre-created S3 bucket for audio files
 OUTPUT_BUCKET = 'awstranscribeoutput'  # Pre-created S3 bucket for transcription results
 
-# Define your secret password here (for demonstration purposes only)
-# PASSWORD = "#Trojan123"
 
-# def login():
-#     st.title("Login")
-#     # Create a password input widget
-#     password_input = st.text_input("Enter password", type="password")
-    
-#     if st.button("Submit"):
-#         if password_input == PASSWORD:
-#             st.session_state["authenticated"] = True
-#             st.experimental_rerun()
-#         else:
-#             st.error("Incorrect password. Please try again.")
-
-# # Initialize session state variable
-# if "authenticated" not in st.session_state:
-#     st.session_state["authenticated"] = False
-
-# # Check if user is authenticated; if not, show login form and stop further execution.
-# if not st.session_state["authenticated"]:
-#     login()
-#     st.stop()
-
-
-# Initialize AWS clients
-s3_client = boto3.client('s3', region_name=AWS_REGION)
-transcribe_client = boto3.client('transcribe', region_name=AWS_REGION)
+## Initialize AWS clients
+s3_client = boto3.client(
+    's3',
+    region_name=AWS_REGION,
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+)
+transcribe_client = boto3.client(
+    'transcribe',
+    region_name=AWS_REGION,
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+)
 
 
 def upload_to_s3(file_obj, bucket, object_name):
