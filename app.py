@@ -11,19 +11,11 @@ INPUT_BUCKET = 'awstranscribeinput'    # Pre-created S3 bucket for audio files
 OUTPUT_BUCKET = 'awstranscribeoutput'  # Pre-created S3 bucket for transcription results
 
 
-## Initialize AWS clients
-s3_client = boto3.client(
-    's3',
-    region_name=AWS_REGION,
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-)
-transcribe_client = boto3.client(
-    'transcribe',
-    region_name=AWS_REGION,
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-)
+
+
+# Initialize AWS clients
+s3_client = boto3.client('s3', region_name=AWS_REGION)
+transcribe_client = boto3.client('transcribe', region_name=AWS_REGION)
 
 
 def upload_to_s3(file_obj, bucket, object_name):
