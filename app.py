@@ -85,8 +85,7 @@ def get_transcription_result(job_name):
         time.sleep(5)
     
     if job_status == 'COMPLETED':
-        #transcript_uri = status['TranscriptionJob']['Transcript']['TranscriptFileUri']
-        transcript_uri = status['TranscriptionJob']['transcripts']['transcript']
+        transcript_uri = status['TranscriptionJob']['Transcript']['TranscriptFileUri']
         st.write("Fetching transcript from:", transcript_uri)
         response = requests.get(transcript_uri)
         
