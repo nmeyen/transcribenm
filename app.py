@@ -75,6 +75,43 @@ def start_transcription(s3_uri, job_name, language_code="en-US", media_format="m
 #     else:
 #         return "Transcription failed. Please check AWS Transcribe logs for details."
 
+# def get_transcription_result(job_name):
+#     while True:
+#         status = transcribe_client.get_transcription_job(TranscriptionJobName=job_name)
+#         job_status = status['TranscriptionJob']['TranscriptionJobStatus']
+#         if job_status in ['COMPLETED', 'FAILED']:
+#             break
+#         st.write("Transcription in progress... Please wait.")
+#         time.sleep(5)
+    
+#     if job_status == 'COMPLETED':
+#         transcript_uri = status['TranscriptionJob']['Transcript']['TranscriptFileUri']
+#         st.write("Fetching transcript from:", transcript_uri)
+#         response = requests.get(transcript_uri)
+        
+#         if response.status_code != 200:
+#             st.error(f"Failed to fetch transcript. HTTP status code: {response.status_code}")
+#             return "Failed to fetch transcript."
+
+#         try:
+#             transcript_data = response.json()
+#         except Exception as e:
+#             st.error("Failed to decode transcript JSON. Here is the raw response:")
+#             st.write(response.text)
+#             return "Failed to decode transcript JSON."
+
+#         # Ensure the expected keys exist in the transcript data
+#         try:
+#             transcript = transcript_data['results']['transcripts'][0]['transcript']
+#         except (KeyError, IndexError) as e:
+#             st.error("Transcript JSON structure is not as expected. Raw data:")
+#             st.write(transcript_data)
+#             return "Transcript JSON structure is not as expected."
+        
+#         return transcript
+#     else:
+#         return "Transcription failed. Please check AWS Transcribe logs for details."
+
 def get_transcription_result(job_name):
     while True:
         status = transcribe_client.get_transcription_job(TranscriptionJobName=job_name)
@@ -91,6 +128,7 @@ def get_transcription_result(job_name):
         
         if response.status_code != 200:
             st.error(f"Failed to fetch transcript. HTTP status code: {response.status_code}")
+            st.write(f"Response content: {response.text}")
             return "Failed to fetch transcript."
 
         try:
