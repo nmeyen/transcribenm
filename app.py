@@ -21,14 +21,14 @@ OUTPUT_BUCKET = 'awstranscribeoutput'  # Pre-created S3 bucket for transcription
 s3_client = boto3.client(
     's3',
     region_name=AWS_REGION,
-    aws_access_key_id=st.secrets("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=st.secrets("AWS_SECRET_ACCESS_KEY")
+    aws_access_key_id=st.secrets["aws"]["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key=st.secrets["aws"]["AWS_SECRET_ACCESS_KEY"]
 )
 transcribe_client = boto3.client(
     'transcribe',
     region_name=AWS_REGION,
-    aws_access_key_id=st.secrets("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=st.secrets("AWS_SECRET_ACCESS_KEY")
+    aws_access_key_id=st.secrets["aws"]["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key=st.secrets["aws"]["AWS_SECRET_ACCESS_KEY"]
 )
 
 def upload_to_s3(file_obj, bucket, object_name):
